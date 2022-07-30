@@ -24,7 +24,7 @@ body {
     color: white;
     font-size: 20px;
 
-    background: #0C0F0A;
+    background: #000000;
 }
 
 .wrapper {
@@ -78,6 +78,5 @@ main {
 }
 
 .button__active{
-    background: #C6CAED;
-    color: #000000;
+    background: #2d793e;
 }
