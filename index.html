@@ -86,6 +86,10 @@
       );
       const invoice = res.data.result;
       tg.openInvoice(invoice);
+
+      Telegram.WebApp.onEvent('invoiceClosed', function() {
+        tg.close()
+      })
     });
   </script>
 </html>
