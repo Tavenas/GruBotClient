@@ -18,37 +18,18 @@
             </header>
             <main class="main">
                 <a href="#" class="btn button__selector" onclick="
-
                     if (!payments.includes('normalizeAudio'))
                         payments.push('normalizeAudio')
                     else payments.splice(payments.indexOf('normalizeAudio'), 1)
-                    console.log(payments);
-
                 ">Нормализация голосовых сообщений</a>
                 <a href="#" class="btn button__selector" onclick="
 
                     if (!payments.includes('createMemes'))
                         payments.push('createMemes')
                     else payments.splice(payments.indexOf('createMemes'), 1)
-                    console.log(payments);
-
                 ">Создание мемов</a> 
             </main>
         </div>
-        <script>
-
-            const main = document.querySelector('main');
-            main.addEventListener('click', e => {
-                if (payments)
-                    tg.MainButton.hide();
-                else 
-                    tg.MainButton.show()
-                if (e.target.classList.contains('button__selector')){
-                    e.target.classList.toggle('button__active');
-                }
-            })
-
-        </script>
         <script>
             let tg = window.Telegram.WebApp;
             tg.expand();
@@ -57,6 +38,20 @@
 
             Telegram.WebApp.onEvent('mainButtonClicked', function() {
                 tg.sendData(payments);
+            })
+
+        </script>
+        <script>
+            const main = document.querySelector('main');
+            main.addEventListener('click', e => {
+                if (payments)
+                    tg.MainButton.hide();
+                else 
+                    tg.MainButton.show()
+                console.log(payments)
+                if (e.target.classList.contains('button__selector')){
+                    e.target.classList.toggle('button__active');
+                }
             })
 
         </script>
