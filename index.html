@@ -35,6 +35,7 @@
             tg.expand();
             tg.MainButton.text = "Перейти к оплате";
             tg.MainButton.color = '#7CFC00';
+            tg.MainButton.textColor = "#FFFFFF";
 
             Telegram.WebApp.onEvent('mainButtonClicked', function() {
                 tg.sendData(payments);
@@ -44,16 +45,15 @@
         <script>
             const main = document.querySelector('main');
             main.addEventListener('click', e => {
-                if (payments)
-                    tg.MainButton.hide();
-                else 
-                    tg.MainButton.show()
                 console.log(payments)
+                if (payments.length !== 0)
+                    tg.MainButton.show();
+                else
+                    tg.MainButton.hide()
                 if (e.target.classList.contains('button__selector')){
                     e.target.classList.toggle('button__active');
                 }
             })
-
         </script>
     </body>
 </html>
