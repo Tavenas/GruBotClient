@@ -29,8 +29,48 @@
                 ">Создание мемов</a> 
             </main>
         </div>
-        <script>
-            const main = document.querySelector('main');
+    </body>
+    <script>
+        let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
+
+tg.expand(); //расширяем на все окно  
+
+tg.MainButton.text = "Changed Text"; //изменяем текст кнопки 
+tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
+tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
+tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
+tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
+
+let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать 
+
+btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
+   if (tg.MainButton.isVisible){ //если кнопка показана 
+      tg.MainButton.hide() //скрываем кнопку 
+   }
+   else{ //иначе
+      tg.MainButton.show() //показываем 
+   }
+});
+
+let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать
+btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
+   if (tg.MainButton.isActive){ //если кнопка показана 
+      tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
+      tg.MainButton.disable() //скрываем кнопку 
+   }
+   else{ //иначе
+      tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
+      tg.MainButton.enable() //показываем 
+   }
+});
+
+Telegram.WebApp.onEvent('mainButtonClicked', function(){
+   tg.sendData("some string that we need to send"); 
+   //при клике на основную кнопку отправляем данные в строковом виде
+});
+
+
+        const main = document.querySelector('main');
             main.addEventListener('click', e => {
                 console.log(payments)
                 if (payments.length !== 0)
@@ -41,20 +81,5 @@
                     e.target.classList.toggle('button__active');
                 }
             })
-        </script>
-    </body>
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
-        tg.MainButton.color = '#F3B923';
-        tg.MainButton.textColor = "#FFFFFF";
-        tg.MainButton.enable()
-
-        // let chat_id = tg.initDataUnsafe.user.id
-
-        Telegram.WebApp.onEvent('mainButtonClicked', function() {
-            tg.sendData(`${chat_id}\n${payments}`);
-        })
     </script>
 </html>
