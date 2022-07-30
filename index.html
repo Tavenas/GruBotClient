@@ -30,21 +30,6 @@
             </main>
         </div>
         <script>
-            let tg = window.Telegram.WebApp;
-            tg.expand();
-            tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
-            tg.MainButton.color = '#F3B923';
-            tg.MainButton.textColor = "#FFFFFF";
-            tg.MainButton.enable()
-
-            let chat_id = tg.initDataUnsafe.user.id
-
-            Telegram.WebApp.onEvent('mainButtonClicked', function() {
-                tg.sendData(`${chat_id}\n${payments}`);
-            })
-
-        </script>
-        <script>
             const main = document.querySelector('main');
             main.addEventListener('click', e => {
                 console.log(payments)
@@ -58,4 +43,18 @@
             })
         </script>
     </body>
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
+        tg.MainButton.color = '#F3B923';
+        tg.MainButton.textColor = "#FFFFFF";
+        tg.MainButton.enable()
+
+        // let chat_id = tg.initDataUnsafe.user.id
+
+        Telegram.WebApp.onEvent('mainButtonClicked', function() {
+            tg.sendData(`${chat_id}\n${payments}`);
+        })
+    </script>
 </html>
