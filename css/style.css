@@ -78,6 +78,10 @@ main {
   text-align: center;
 }
 
+.btn:focus {
+  background-color: ;
+}
+
 .button__active {
-  background: #ef5d60;
+  background: #735d78;
 }
