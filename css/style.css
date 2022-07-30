@@ -78,6 +78,5 @@ main {
 }
 
 .button__active{
-    transform: scale(1.03);
     background: #2d793e;
 }
