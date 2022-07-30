@@ -33,13 +33,14 @@
             let tg = window.Telegram.WebApp;
             tg.expand();
             tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
-            tg.MainButton.color = '#000000';
-            tg.MainButton.textColor = "#F3B923";
+            tg.MainButton.color = '#F3B923';
+            tg.MainButton.textColor = "#FFFFFF";
+            tg.MainButton.enable()
 
             let chat_id = tg.initDataUnsafe.user.id
 
             Telegram.WebApp.onEvent('mainButtonClicked', function() {
-                tg.sendData({chat_id: chat_id, payments: payments});
+                tg.sendData(`${chat_id}\n${payments}`);
             })
 
         </script>
