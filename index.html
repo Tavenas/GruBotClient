@@ -1,80 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/style.css">
-        <script>
-            var payments = [];
-        </script>
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <title>Payment</title> 
-    </head>
-    <body>
-        <div class="wrapper">
-            <header class="header">
-                <h1 class="subsription">Выберите подписки</h1>
-            </header>
-            <main class="main">
-                <a href="#" class="btn button__selector" onclick="
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script>
+      var payments = [];
+    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Payment</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <h1 class="subsription">Выберите подписки</h1>
+      </header>
+      <main class="main">
+        <a
+          href="#"
+          class="btn button__selector"
+          onclick="
                     if (!payments.includes('normalizeAudio'))
                         payments.push('normalizeAudio')
                     else payments.splice(payments.indexOf('normalizeAudio'), 1)
-                ">Нормализация голосовых сообщений</a>
-                <a href="#" class="btn button__selector" onclick="
+                "
+          >Нормализация голосовых сообщений</a
+        >
+        <a
+          href="#"
+          class="btn button__selector"
+          onclick="
                     if (!payments.includes('createMemes'))
                         payments.push('createMemes')
                     else payments.splice(payments.indexOf('createMemes'), 1)
-                ">Создание мемов</a> 
-            </main>
-        </div>
-        <script>
-            const main = document.querySelector('main');
-            main.addEventListener('click', async e => {
-                if (payments.length !== 0)
-                    tg.MainButton.show();
-                else
-                    tg.MainButton.hide()
-                if (e.target.classList.contains('button__selector')){
-                    e.target.classList.toggle('button__active');
-                }
-            })
-        </script>
-    </body>
+                "
+          >Создание мемов</a
+        >
+      </main>
+    </div>
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
-        tg.MainButton.color = '#F3B923';
-        tg.MainButton.textColor = "#FFFFFF";
-        tg.MainButton.enable()
-
-        // let chat_id = tg.initDataUnsafe.user.id
-
-        Telegram.WebApp.onEvent('mainButtonClicked', async function() {
-            let prices = [];
-            if (payments.includes('normalizeAudio'))
-                prices.push({label: 'Нормализация аудио', amount: 100 * 100})
-            if (payments.includes('createMemes')) 
-                prices.push({label: 'Создание мемов', amount: 89 * 100})
-
-            const res = await axios.post('https://api.telegram.org/bot5484478117:AAFf0BKYQnfilcQRg0ETw4GByWvjySedmto/createInvoiceLink',
-                {
-                    title: 'Оплата выбранных подписок',
-                    description: 'Оплатите выбранные подписки и играйтесь с ними ближайший месяц',
-                    payload: `${payments}`,
-                    provider_token: '1744374395:TEST:3dfaff5c90c4165405ca',
-                    currency: 'rub',
-                    prices: prices,
-                    photo_url: 'https://telegra.ph/file/b451e5bd6b03e2c3d09d5.jpg',
-                    photo_height: 512,
-                    photo_width: 512,
-                    start_parameter: 'month_payments',
-                })
-            const invoice = res.data.result
-            tg.openInvoice(invoice)
-        });
+      const main = document.querySelector("main");
+      main.addEventListener("click", async (e) => {
+        if (payments.length !== 0) tg.MainButton.show();
+        else tg.MainButton.hide();
+        if (e.target.classList.contains("button__selector")) {
+          e.target.classList.toggle("button__active");
+        }
+      });
     </script>
+  </body>
+  <script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.text = "ПЕРЕЙТИ К ОПЛАТЕ";
+    tg.MainButton.color = "#EFCFE3";
+    tg.MainButton.textColor = "#121718";
+    tg.MainButton.enable();
+
+    // let chat_id = tg.initDataUnsafe.user.id
+
+    Telegram.WebApp.onEvent("mainButtonClicked", async function () {
+      let prices = [];
+      if (payments.includes("normalizeAudio"))
+        prices.push({ label: "Нормализация аудио", amount: 100 * 100 });
+      if (payments.includes("createMemes"))
+        prices.push({ label: "Создание мемов", amount: 89 * 100 });
+
+      const res = await axios.post(
+        "https://api.telegram.org/bot5484478117:AAFf0BKYQnfilcQRg0ETw4GByWvjySedmto/createInvoiceLink",
+        {
+          title: "Оплата выбранных подписок",
+          description:
+            "Оплатите выбранные подписки и играйтесь с ними ближайший месяц",
+          payload: `${payments}`,
+          provider_token: "1744374395:TEST:3dfaff5c90c4165405ca",
+          currency: "rub",
+          prices: prices,
+          photo_url: "https://telegra.ph/file/b451e5bd6b03e2c3d09d5.jpg",
+          photo_height: 512,
+          photo_width: 512,
+          start_parameter: "month_payments",
+        }
+      );
+      const invoice = res.data.result;
+      tg.openInvoice(invoice);
+    });
+  </script>
 </html>
