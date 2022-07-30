@@ -9,6 +9,7 @@
             var payments = [];
         </script>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <title>Payment</title> 
     </head>
     <body>
@@ -31,8 +32,23 @@
         </div>
         <script>
             const main = document.querySelector('main');
-            main.addEventListener('click', e => {
-                console.log(payments)
+            main.addEventListener('click', async e => {
+                const res = await axios.post('https://api.telegram.org/bot5484478117:AAFf0BKYQnfilcQRg0ETw4GByWvjySedmto/createInvoiceLink',
+                {
+                    title: 'Оплата',
+                    description: 'Оплата выбранных подписок',
+                    payload: 'Оплата прошла успешно',
+                    provider_token: '401643678:TEST:f4448061-ed5a-4935-92c4-5ca2084856dc',
+                    currency: 'rub',
+                    prices: [
+                        {
+                            label: 'Подписка',
+                            amount: 100 * 100
+                        }
+                    ],
+                    photo_url: 'https://telegra.ph/file/b451e5bd6b03e2c3d09d5.jpg'
+                })
+                console.log(res.data);
                 if (payments.length !== 0)
                     tg.MainButton.show();
                 else
@@ -54,7 +70,7 @@
         // let chat_id = tg.initDataUnsafe.user.id
 
         Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            tg.sendData(payments); 
+            tg.openInvoice('https://t.me/$J8FEQMBmMUvaAAAANN9-Is-hSmE')
         //при клике на основную кнопку отправляем данные в строковом виде
         });
     </script>
