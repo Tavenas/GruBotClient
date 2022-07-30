@@ -1,28 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TelegramLogo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    <header id="header", class="header" >
-        <div class="container">
-            <div class="headerinfo">
-                <h1 class="headertext">This is a start logo in Telegram bot</h1>
-                <h3 class="nothing">and nothing...</h3>
-            </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script>
+            var payments = [];
+        </script>
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <title>Payment</title> 
+    </head>
+    <body>
+        <div class="wrapper">
+            <header class="header">
+                <h1 class="subsription">Выберите подписки</h1>
+            </header>
+            <main class="main">
+                <a href="#" class="btn button__selector" onclick="
+
+                    if (!payments.includes('normalizeAudio'))
+                        payments.push('normalizeAudio')
+                    else payments.splice(payments.indexOf('normalizeAudio'), 1)
+                    console.log(payments);
+
+                ">Нормализация голосовых сообщений</a>
+                <a href="#" class="btn button__selector" onclick="
+
+                    if (!payments.includes('createMemes'))
+                        payments.push('createMemes')
+                    else payments.splice(payments.indexOf('createMemes'), 1)
+                    console.log(payments);
+
+                ">Создание мемов</a> 
+            </main>
         </div>
-    </header>
-    <section id="about", class="about">
-        <div class="container">
-            <div class="image">
-                <img src="./img/GruAudioBotImage.jpeg" alt="logo" class="logo">
-            </div>
-        </div>
-    </section>
-</body>
+        <script>
+
+            const main = document.querySelector('main');
+            main.addEventListener('click', e => {
+                if (payments)
+                    tg.MainButton.hide();
+                else 
+                    tg.MainButton.show()
+                if (e.target.classList.contains('button__selector')){
+                    e.target.classList.toggle('button__active');
+                }
+            })
+
+        </script>
+        <script>
+            let tg = window.Telegram.WebApp;
+            tg.expand();
+            tg.MainButton.text = "Перейти к оплате";
+            tg.MainButton.color = '#7CFC00';
+
+            Telegram.WebApp.onEvent('mainButtonClicked', function() {
+                tg.sendData(payments);
+            })
+
+        </script>
+    </body>
 </html>
