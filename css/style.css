@@ -79,9 +79,9 @@ main {
 }
 
 .btn:focus {
-  background-color: ;
+  background-color: #735d78;
 }
 
 .button__active {
-  background: #735d78;
+  background: #ef5d60;
 }
