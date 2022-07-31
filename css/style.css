@@ -76,10 +76,13 @@ main {
   transition: all 0.1s ease-in-out;
   cursor: pointer;
   text-align: center;
-}
 
-.btn:focus {
-  background-color: #735d78;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
+   user-select: none
 }
 
 .button__active {
