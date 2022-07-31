@@ -82,7 +82,13 @@ main {
   -khtml-user-select: none; 
   -moz-user-select: none; 
   -ms-user-select: none;
-   user-select: none
+  user-select: none
+}
+
+.btn:focus {
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .button__active {
