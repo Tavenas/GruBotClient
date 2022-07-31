@@ -18,23 +18,22 @@
         <h1 class="subsription">Выберите подписки</h1>
       </header>
       <main class="main">
-        <a
+        <button
             class="btn button__selector"
             onclick="
                     if (!payments.includes('normalizeAudio'))
                         payments.push('normalizeAudio')
                     else payments.splice(payments.indexOf('normalizeAudio'), 1)
             "
-          >Нормализация голосовых сообщений</a
-        >
-        <a
+          >Нормализация голосовых сообщений</button>
+        <button
             class="btn button__selector"
             onclick="
                     if (!payments.includes('createMemes'))
                         payments.push('createMemes')
                     else payments.splice(payments.indexOf('createMemes'), 1)
             "
-          >Создание мемов</a
+          >Создание мемов</button
         >
       </main>
     </div>
