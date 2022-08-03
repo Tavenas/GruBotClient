@@ -29,6 +29,14 @@
         <div
           class="btn button__selector"
             onclick="
+                if (!payments.includes('separate'))
+                    payments.push('separate')
+                else payments.splice(payments.indexOf('separate'), 1)
+            "
+          >Разделение звука на дорожки</div>
+        <div
+          class="btn button__selector"
+            onclick="
                 if (!payments.includes('createMemes'))
                     payments.push('createMemes')
                 else payments.splice(payments.indexOf('createMemes'), 1)
