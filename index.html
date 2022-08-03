@@ -68,9 +68,11 @@
     Telegram.WebApp.onEvent("mainButtonClicked", async function () {
       let prices = [];
       if (payments.includes("normalizeAudio"))
-        prices.push({ label: "Нормализация аудио", amount: 100 * 100 });
+        prices.push({ label: "Нормализация голосовых сообщений", amount: 100 * 100 });
+      if (payments.includes("separate"))
+        prices.push({ label: "Разделение звука на дорожки", amount: 100 * 100 });
       if (payments.includes("createMemes"))
-        prices.push({ label: "Создание мемов", amount: 89 * 100 });
+        prices.push({ label: "Создание мемов", amount: 100 * 100 });
 
       const res = await axios.post(
         "https://api.telegram.org/bot5484478117:AAFf0BKYQnfilcQRg0ETw4GByWvjySedmto/createInvoiceLink",
